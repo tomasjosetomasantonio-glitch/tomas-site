@@ -1,260 +1,138 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mensagem Personalizada | Serviços de Tecnologia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Portfolio | Secure Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --accent: #00f2ff; --bg: #050505; --card: #111; --text: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; }
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        /* --- Admin Panel --- */
+        #admin-panel { 
+            background: #111; padding: 30px; border-bottom: 2px solid var(--accent); 
+            display: none; position: relative;
+        }
+        .admin-controls { display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end; }
+        .input-group { display: flex; flex-direction: column; gap: 5px; }
+        input, select { padding: 12px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; }
+        
+        .btn-action { background: var(--accent); color: #000; border: none; padding: 12px 25px; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        .btn-logout { background: #ff3e00; color: white; position: absolute; top: 10px; right: 10px; border: none; padding: 5px 10px; cursor: pointer; }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, Tahoma, sans-serif;
-}
+        /* --- Portfolio Grid --- */
+        .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 15px; padding: 20px; }
+        .project-card { position: relative; height: 450px; background: var(--card); overflow: hidden; border-radius: 10px; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; }
+        .project-info { position: absolute; bottom: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+        
+        .btn-del { position: absolute; top: 15px; left: 15px; background: rgba(255,0,0,0.7); color: white; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: none; }
 
-body{
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    color:white;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.container{
-    background:rgba(0,0,0,0.75);
-    max-width:900px;
-    width:100%;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.6);
-    text-align:center;
-}
-
-h1{
-    font-size:2.6rem;
-    background:linear-gradient(90deg,#ff9a00,#ff0080,#00ffcc);
-    -webkit-background-clip:text;
-    color:transparent;
-    margin-bottom:10px;
-}
-
-h2{
-    color:#ffd166;
-    margin-bottom:25px;
-}
-
-.input-section{
-    background:rgba(255,255,255,0.05);
-    padding:25px;
-    border-radius:15px;
-    margin-bottom:30px;
-}
-
-label{
-    display:block;
-    margin-bottom:15px;
-    font-size:1.2rem;
-    color:#a9e4ff;
-}
-
-input{
-    width:100%;
-    max-width:400px;
-    padding:15px;
-    border-radius:10px;
-    border:2px solid #4d96ff;
-    background:#000;
-    color:white;
-    font-size:1.1rem;
-    margin-bottom:20px;
-    text-align:center;
-}
-
-button{
-    padding:15px 40px;
-    border:none;
-    border-radius:50px;
-    font-size:1.1rem;
-    background:linear-gradient(90deg,#ff9a00,#ff6b6b);
-    color:white;
-    cursor:pointer;
-}
-
-.message-section{
-    display:none;
-    margin-top:30px;
-}
-
-.message-section.show{
-    display:block;
-}
-
-.message{
-    font-size:1.9rem;
-    color:#ffd166;
-    margin-bottom:15px;
-}
-
-.message span{
-    color:#ff9a00;
-    font-weight:bold;
-}
-
-.fireworks{
-    font-size:2rem;
-    margin-bottom:15px;
-}
-
-/* ÁREA DE SERVIÇOS */
-.ads{
-    margin-top:40px;
-    padding:30px;
-    background:rgba(0,0,0,0.4);
-    border-radius:15px;
-    border:1px solid rgba(255,255,255,0.15);
-    text-align:left;
-}
-
-.ads h3{
-    color:#ff9a00;
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.ads ul{
-    list-style:none;
-    margin-bottom:20px;
-}
-
-.ads ul li{
-    margin-bottom:10px;
-    font-size:1rem;
-}
-
-.cta{
-    text-align:center;
-    color:#ffd166;
-    margin-bottom:15px;
-}
-
-.whatsapp-btn{
-    display:block;
-    text-align:center;
-    background:#25D366;
-    color:white;
-    padding:15px;
-    border-radius:50px;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-.whatsapp-btn:hover{
-    background:#1ebe5d;
-}
-
-.dev{
-    margin-top:15px;
-    text-align:center;
-    font-size:0.9rem;
-    color:#a9e4ff;
-}
-
-@media(max-width:600px){
-    h1{font-size:2rem;}
-    .message{font-size:1.5rem;}
-}
-</style>
+        /* Float Button */
+        .admin-trigger { position: fixed; top: 20px; right: 20px; z-index: 100; background: none; border: none; color: #333; cursor: pointer; }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+    <button class="admin-trigger" onclick="loginAdmin()"><i class="fas fa-user-shield"></i></button>
 
-<h1>💻 Mensagem Personalizada</h1>
-<h2>Tecnologia • Design • Sistemas</h2>
+    <div id="admin-panel">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+        <h2 style="margin-bottom: 20px;">Painel de Gestão</h2>
+        <div class="admin-controls">
+            <div class="input-group">
+                <label>Imagem do Projeto</label>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <div class="input-group">
+                <label>Título</label>
+                <input type="text" id="titleInput" placeholder="Ex: Logotipo Nike">
+            </div>
+            <div class="input-group">
+                <label>Categoria</label>
+                <input type="text" id="catInput" placeholder="Ex: Branding">
+            </div>
+            <button class="btn-action" onclick="handleUpload()">Adicionar ao Portfólio</button>
+        </div>
+    </div>
 
-<div class="input-section">
-    <label><i class="fas fa-user"></i> Digite seu nome:</label>
-    <input type="text" id="name" placeholder="Seu nome aqui">
-    <button id="submit-btn">
-        <i class="fas fa-paper-plane"></i> Exibir Mensagem
-    </button>
-</div>
+    <header style="padding: 100px 10% 40px;">
+        <h1 style="font-family: 'Syncopate'; font-size: 3rem;">STUDIO<br><span style="color: var(--accent);">DESIGN</span></h1>
+    </header>
 
-<div class="message-section" id="message-section">
-    <div class="fireworks">🎆 🎆 🎆</div>
-    <div class="message" id="message"></div>
-</div>
+    <div class="work-grid" id="main-grid"></div>
 
-<!-- SERVIÇOS DE TECNOLOGIA -->
-<div class="ads">
-    <h3>🚀 Serviços de Tecnologia & Design</h3>
+    <script>
+        const ADMIN_PASS = "1234"; // Define aqui a tua senha
+        let projects = JSON.parse(localStorage.getItem('design_db')) || [];
+        let isLogged = false;
 
-    <ul>
-        <li>🌐 Criação de sites web profissionais</li>
-        <li>🧾 Sistemas de vendas e gestão</li>
-        <li>🎨 Design gráfico (logotipos, banners, convites)</li>
-        <li>📢 Divulgação digital de negócios</li>
-        <li>💡 Mensagens e páginas personalizadas</li>
-    </ul>
+        function loginAdmin() {
+            const pass = prompt("Insira a senha de Administrador:");
+            if (pass === ADMIN_PASS) {
+                isLogged = true;
+                document.getElementById('admin-panel').style.display = 'block';
+                render();
+            } else {
+                alert("Senha incorreta!");
+            }
+        }
 
-    <p class="cta">
-        Precisa de um site ou sistema para o seu negócio?<br>
-        <strong>Fale comigo agora mesmo 👇</strong>
-    </p>
+        function logout() {
+            isLogged = false;
+            document.getElementById('admin-panel').style.display = 'none';
+            render();
+        }
 
-    <a class="whatsapp-btn"
-       href="https://wa.me/258869276546"
-       target="_blank">
-       <i class="fab fa-whatsapp"></i> WhatsApp: 869276546
-    </a>
+        function handleUpload() {
+            const file = document.getElementById('fileInput').files[0];
+            const title = document.getElementById('titleInput').value;
+            const cat = document.getElementById('catInput').value;
 
-    <p class="dev">
-        Desenvolvido por <strong>Tomas J. T. Antonio</strong>
-    </p>
-</div>
+            if (!file || !title) return alert("Preenche todos os campos!");
 
-</div>
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                const base64String = reader.result;
+                projects.push({ title, cat, img: base64String });
+                localStorage.setItem('design_db', JSON.stringify(projects));
+                render();
+                // Limpar campos
+                document.getElementById('titleInput').value = "";
+                document.getElementById('fileInput').value = "";
+            }
+            reader.readAsDataURL(file);
+        }
 
-<script>
-document.addEventListener('DOMContentLoaded', function(){
+        function deleteProj(index) {
+            if(confirm("Remover este design?")) {
+                projects.splice(index, 1);
+                localStorage.setItem('design_db', JSON.stringify(projects));
+                render();
+            }
+        }
 
-const nameInput = document.getElementById('name');
-const btn = document.getElementById('submit-btn');
-const msgBox = document.getElementById('message-section');
-const msg = document.getElementById('message');
+        function render() {
+            const grid = document.getElementById('main-grid');
+            grid.innerHTML = projects.map((p, i) => `
+                <div class="project-card">
+                    <button class="btn-del" style="display: ${isLogged ? 'block' : 'none'}" onclick="deleteProj(${i})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <img src="${p.img}">
+                    <div class="project-info">
+                        <h3>${p.title}</h3>
+                        <p style="color: var(--accent); font-size: 0.8rem;">${p.cat}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-function showMessage(){
-    const userName = nameInput.value.trim();
-
-    if(userName === ''){
-        alert('Digite seu nome!');
-        return;
-    }
-
-    const messages = [
-        `🎉 Feliz Ano Novo, <span>${userName}</span>! Que 2026 seja de sucesso!`,
-        `✨ <span>${userName}</span>, que seus projetos cresçam em 2026!`,
-        `🚀 Novo ano, novas oportunidades, <span>${userName}</span>!`,
-        `🌟 Que 2026 seja o ano da tecnologia e das conquistas, <span>${userName}</span>!`
-    ];
-
-    const randomMessage =
-        messages[Math.floor(Math.random() * messages.length)];
-
-    msg.innerHTML = randomMessage;
-    msgBox.classList.add('show');
-}
-
-btn.addEventListener('click', showMessage);
-});
-</script>
-
+        render();
+    </script>
 </body>
 </html>
